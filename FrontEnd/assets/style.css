@@ -193,3 +193,40 @@ nav a {
 	color: black;
 }
 
+
+
+.editor-bar {
+	display: flex;
+	justify-content: center;
+	color: white;
+	background-color: black;
+	height: 60px;
+	font-size: 16px;
+}
+
+.editor-bar p {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.editor-bar span {
+	background-color: white;
+	color: black;
+	border-radius: 60px;
+	padding: 10px 20px 10px 20px;
+	margin-left: 10px;
+}
+
+.editor-bar i {
+	margin-right: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.fa-pen-to-square {
+	margin-right: 10px;
+}
+
+

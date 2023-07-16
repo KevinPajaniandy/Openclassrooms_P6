@@ -1,6 +1,10 @@
 // declaration des variables globaux 
 let works =[];
-let cats =[];
+let categoriesWorks =[];
+
+checkIfConnected();
+loadFilters();
+loadProjects();
 
 // Charger les projet depuis l'API
 function loadProjects(){
@@ -33,8 +37,8 @@ function loadFilters(){
       })
       .then(function (data) {
        // console.table(data);
-        cats = data;
-        createFilters(cats);
+        categoriesWorks = data;
+        createFilters(categoriesWorks);
       })
       .catch(function(error) {
         console.log('Il y a eu un problème avec l\'opération fetch : ' + error.message);
@@ -50,27 +54,20 @@ function createProjects(tableauProjet){
         console.log(element)
         const figure = createFigure(element);
         gallery.appendChild(figure);
-        
     });
 }
-// // LA fonction qui boucle sur le tableau pour creer un element div pour chaque element du tableau 
+
 function createFilters(tableauFilter){
-  const categories = document.querySelector(".categories");
-  categories.innerHTML="";
+  const filters = document.querySelector(".filters");
+  filters.innerHTML="";
   tableauFilter.forEach(element => {
       console.log(element)
-      const div = creatediv(element);
-      categories.appendChild(div);
+      const filter = createFilter(element);
+      filters.appendChild(filter);
   });
 }
 
 // Coder une fonction que me cree un element figure comme suit 
-/* 
-<figure>
-    <img src="assets/images/hotel-first-arte-new-delhi.png" alt="Hotel First Arte - New Delhi">
-    <figcaption>Hotel First Arte - New Delhi</figcaption>
-</figure>
-*/
 function createFigure(work){
   // On crée un élément HTML de type figure
     const figure = document.createElement('figure');
@@ -89,19 +86,59 @@ function createFigure(work){
 
     return figure;
 }
-/*
-function createFilter(cats){
-    const div = document.createElement('div');
-    figure.setAttribute("id", cats.id);
-    
-    const figcaption = document.createElement('figcaption');
-    figcaption.textContent = work.title;
-    figure.appendChild(img);
-    figure.appendChild(figcaption);
+function createFilter(categorie) {
 
-    return figure;
+// On crée un bouton pour le filtre et on lui attribue le nom de la catégorie de travaux
+  const button = document.createElement("div");
+  button.textContent = categorie.name;
+  button.id = categorie.id;
+  button.className="filter";
+// On ajoute un événement de clic sur le bouton pour filtrer les travaux correspondant à la catégorie sélectionnée
+  button.addEventListener("click", () => {
+// On affiche l'élément HTML filterContainer dans la console pour vérification
+    console.log(categorie);
+
+  });
+
+  return button;
 }
-*/
 
-loadProjects();
+function checkIfConnected(){
 
+// Si l'utilisateur est connecté
+if (localStorage.getItem('token')) {
+// afficher la barre noir
+// afficher les bouton modifier 
+// afficher le lien logout dans le menu et cacher celui de login
+const login = document.getElementById("login");
+login.style.display = "none";
+const logout = document.getElementById("logout");
+logout.style.display = "block";
+// cacher les filtres 
+const filtres = document.querySelector(".filters");
+filtres.style.display = "none";
+}
+else{
+  // cacher le lien logout dans le menu et afficher celui de login
+const login = document.getElementById("login");
+login.style.display = "block";
+const logout = document.getElementById("logout");
+logout.style.display = "none";
+// afficher les filtres 
+const filtres = document.querySelector(".filters");
+filtres.style.display = "block";
+}
+}
+
+
+ // Ajouter un bouton "Mode édition" avec un icône et un texte à la barre d'édition
+ // coder la barre noir dans le html 
+ // dans le js : basculer entre display block ou flex et display node pour afficher et cacher les element html 
+/* const editorBar = document.createElement('div');
+editorBar.className = 'editor-bar';
+ editorBar.innerHTML = '<i class = \' fa-regular fa-pen-to-square \'></i> <p>Mode édition <span>publier les changements</span></p>';
+ // Ajouter la barre d'édition au début du corps de la page
+ document.body.prepend(editorBar);*/
+ // Modifier le texte du bouton de connexion pour qu'il dise "Déconnexion"
+ 
+ // Suppression de tous les filtres
