@@ -36,7 +36,7 @@
 	<section id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
-			<div class="btnModifier modifier-projet-container-one btn">
+			<div class="btnModifier modifier-projet-container-one">
 				<i class="fas fa-pen-to-square"></i> 
 				<span>modifier</span>
 			</div>
@@ -49,9 +49,9 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<div class="modifier-projet-container-two btn">
+		<div class="modifier-projet-container-two">
 			<h2>Mes projets</h2>
-			<div class="btnModifier modifier-projet-container-two btn">
+			<div class="btnModifier modifier-projet-container-two">
 				<i class="fas fa-pen-to-square"></i> 
 				<span>modifier</span>
 			</div>
@@ -86,9 +86,9 @@
 </footer>
 
 <!-- Modale -->
-
-<div id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal" style="display:none;" >
-	<div class="modal-wrapper js-modal-stop" id="js-modal-first">
+<div id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal" style="display:none;">
+	<div class="modal-overlay"></div>
+	<div class="modal-wrapper js-modal-stop modal-page-one" id="js-modal-first">
 		<a href="#"><i class="fa-solid fa-xmark js-modal-close"></i></a>
 		<p id="titlemodal">Galerie photo</p>
 		<div class="projets-modal"></div>
@@ -96,7 +96,7 @@
 		<p class="delete-galery">Supprimer la galerie</p>
 	</div>
 	
-	<div class="modal-wrapper js-modal-stop-two" id="js-modal-add-project" style="display:none;">
+	<div class="modal-wrapper js-modal-stop-two modal-page-two" id="js-modal-add-project" style="display:none;">
 		<a href="#"><i class="fa-solid fa-xmark js-modal-close-two"></i></a>
 		<a href="#"><i class="fa-solid fa-arrow-left js-modal-return"></i></a>
 		<p id="titlemodal">Ajout photo</p>

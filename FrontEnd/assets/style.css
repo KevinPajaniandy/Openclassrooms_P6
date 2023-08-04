@@ -123,6 +123,14 @@ nav li:hover {
 
 #introduction p {
 	margin-bottom: 0.5em;
+	width: 404px;
+	color: #3D3D3D;
+	font-family: Work Sans;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+
 }
 #portfolio h2 {
 	text-align: center;
@@ -229,6 +237,11 @@ nav a {
 	height: 38px;
 }
 
+.btnModifier:hover {
+	color: #B1663C;
+	cursor: pointer;
+}
+
 .btn:hover {
 	color: #B1663C;
 	cursor: pointer;
@@ -276,18 +289,28 @@ nav a {
 .filter:hover {
 	cursor: pointer;
 }
+
 .modifier-projet-container-one {
-	margin-left: 55px;
-	margin-top: 20px;
+	margin-left: 60px;
+	margin-top: 15px;
+}
+
+.modifier-projet-container-one span  {
+	margin-top: 10px;
+	margin-left: 10px;
 }
 
 .modifier-projet-container-two {
 	display: flex;
 	justify-content: center;
+	margin-bottom: 45px;
+	margin-left: 20px;
 }
 
 .modifier-projet-container-two span  {
-	margin-top: 10px;}
+	margin-top: 10px;
+	margin-left: 10px;
+}
 
 .modifier-projet-container-two i {
 	margin-top: 10px;
