@@ -1,6 +1,9 @@
 // declaration des variables globaux 
 let works =[];
-let categoriesWorks =[];
+let categoriesWorks =[ {
+  "id": 0,
+  "name": "Tous"
+}];
 
 checkIfConnected();
 loadFilters();
@@ -36,8 +39,9 @@ function loadFilters(){
             }
       })
       .then(function (data) {
-       // console.table(data);
-        categoriesWorks = data;
+        data.forEach(element => {
+          categoriesWorks.push(element);
+        });
         createFilters(categoriesWorks);
       })
       .catch(function(error) {
@@ -57,13 +61,20 @@ function createProjects(tableauProjet){
     });
 }
 
+  // Cette fonction prend un paramètre tableau d'éléments.
 function createFilters(tableauFilter){
+  // On sélectionne un élément du document ayant la classe CSS "filters" et on le stocke dans la variable "filters".
   const filters = document.querySelector(".filters");
+  // On vide le contenu de l'élément "filters". Cela effacera tous les éléments enfants qu'il contient.
   filters.innerHTML="";
+  // On utilise une boucle forEach pour parcourir chaque élément du tableau "tableauFilter".
   tableauFilter.forEach(element => {
-      console.log(element)
-      const filter = createFilter(element);
-      filters.appendChild(filter);
+  // On affiche chaque élément du tableau dans la console.
+  console.log(element)
+  // On appelle une fonction appelée "createFilter" avec l'élément actuel en tant qu'argument. Le résultat de cette fonction est stocké dans une variable appelée "filter".
+  const filter = createFilter(element);
+  // On ajoute l'élément "filter" en tant qu'enfant de l'élément "filters". Cela placera l'élément "filter" à l'intérieur de l'élément "filters".
+  filters.appendChild(filter);
   });
 }
 
@@ -87,24 +98,50 @@ function createFigure(work){
     return figure;
 }
 function createFilter(categorie) {
-
 // On crée un bouton pour le filtre et on lui attribue le nom de la catégorie de travaux
+
+// Crée un nouvel élément HTML de type "div" et l'assigne à la variable "button".
   const button = document.createElement("div");
+  // Attribue le texte contenu dans la propriété "name" de l'objet "categorie" à la propriété "textContent" de l'élément "button".
   button.textContent = categorie.name;
+  // Attribue la valeur de la propriété "id" de l'objet "categorie" à la propriété "id" de l'élément "button".
   button.id = categorie.id;
+  // Ajoute la classe CSS "filter" à l'élément "button".
   button.className="filter";
 // On ajoute un événement de clic sur le bouton pour filtrer les travaux correspondant à la catégorie sélectionnée
   button.addEventListener("click", () => {
-// On affiche l'élément HTML filterContainer dans la console pour vérification
-    console.log(categorie);
+ // On ajoute la classe 'button-selected' au bouton sélectionné
+  resetFilters(categorie.id);
+  if(categorie.id == 0){
+    createProjects(works);
+  }
+  else{
 
+    // trouver la nouvelle liste filtré depuis la liste des projets globale
+ const listFilter= works.filter((work)=>(work.categoryId == categorie.id)); 
+ // resultat : actualiser l'affichage par la nouvelle liste filtré
+ createProjects(listFilter);
+
+  }
+ 
   });
 
   return button;
 }
 
+function resetFilters(categorieId){
+  const listFilters = document.querySelectorAll('.filter');
+  listFilters.forEach(element => {
+    if(element.id == categorieId)
+    {
+      element.classList.add('button-selected');
+    }
+    else{
+    element.classList.remove('button-selected');
+  }
+  });
+}
 function checkIfConnected(){
-
 // Si l'utilisateur est connecté
 if (localStorage.getItem('token')) {
 // afficher la barre noir
@@ -117,8 +154,16 @@ logout.style.display = "block";
 // cacher les filtres 
 const filtres = document.querySelector(".filters");
 filtres.style.display = "none";
+// cacher la barre noir 
+const barreNoir = document.querySelector(".barreNoir")
+barreNoir.style.display = "flex";
+// cacher les boutons modifier
+const btnsModifier = document.querySelectorAll(".btnModifier")
+btnsModifier.forEach(element => {
+  element.style.display = "Block";
+});
 }
-else{
+else {
   // cacher le lien logout dans le menu et afficher celui de login
 const login = document.getElementById("login");
 login.style.display = "block";
@@ -126,9 +171,27 @@ const logout = document.getElementById("logout");
 logout.style.display = "none";
 // afficher les filtres 
 const filtres = document.querySelector(".filters");
-filtres.style.display = "block";
+filtres.style.display = "flex";
+// afficher la barre noire 
+const barreNoir = document.querySelector(".barreNoir")
+barreNoir.style.display ="none";
+// cacher les boutons modifier
+const btnsModifier = document.querySelectorAll(".btnModifier")
+btnsModifier.forEach(element => {
+  element.style.display = "none";
+});
 }
 }
+// Lorsque l'utilisateur clique sur "logout", il se déconnecte.
+const displayLogout = document.getElementById("logout");
+// Ajoute un écouteur d'événement "click" à l'élément "displayLogout".
+displayLogout.addEventListener("click",() =>{
+  // Supprime l'élément "token" stocké dans le localStorage du navigateur.
+  window.localStorage.removeItem("token");
+  // redirect to offline homepage
+  window.location.href = "/FrontEnd/index.html";
+});
+
 
 
  // Ajouter un bouton "Mode édition" avec un icône et un texte à la barre d'édition
@@ -142,3 +205,5 @@ editorBar.className = 'editor-bar';
  // Modifier le texte du bouton de connexion pour qu'il dise "Déconnexion"
  
  // Suppression de tous les filtres
+
+ 

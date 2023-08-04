@@ -33,5 +33,3 @@ loginForm.addEventListener('submit', async (event) => {
     error.textContent = 'Nom d\'utilisateur ou mot de passe incorrect.';
   }
 });
-
-

@@ -9,15 +9,22 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<meta name="description" content="">
+	<link rel="stylesheet" href="./assets/modale.css">
 	<link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
-
+	<div class="barreNoir">
+		<div class="btnModifier">
+			<i class="fas fa-pen-to-square"></i>
+			<span>Mode édition</span>
+		</div>
+		<button class="btn">publier les changements</button>
+	</div>
 <header>
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
-			<li>projets</li>
+			<a href="./index.html"></a><li>projets</li>
 			<li>contact</li>
 			<a id="login" href="/FrontEnd/login.html"><li>login</li></a>
 			<a id="logout"><li>logout</li></a>
@@ -29,6 +36,10 @@
 	<section id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
+			<div class="btnModifier modifier-projet-container-one btn">
+				<i class="fas fa-pen-to-square"></i> 
+				<span>modifier</span>
+			</div>
 		</figure>
 		<article>
 			<h2>Designer d'espace</h2>
@@ -38,8 +49,15 @@
 		</article>
 	</section>
 	<section id="portfolio">
-		<h2>Mes Projets</h2>
-		<div class="filters"></div>
+		<div class="modifier-projet-container-two btn">
+			<h2>Mes projets</h2>
+			<div class="btnModifier modifier-projet-container-two btn">
+				<i class="fas fa-pen-to-square"></i> 
+				<span>modifier</span>
+			</div>
+		</div>	
+		<div class="filters">
+		</div>	
 		<div class="gallery"></div>
 	</section>
 
@@ -66,6 +84,48 @@
 		</ul>
 	</nav>
 </footer>
+
+<!-- Modale -->
+
+<div id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal" style="display:none;" >
+	<div class="modal-wrapper js-modal-stop" id="js-modal-first">
+		<a href="#"><i class="fa-solid fa-xmark js-modal-close"></i></a>
+		<p id="titlemodal">Galerie photo</p>
+		<div class="projets-modal"></div>
+		<input class="add-photo" type="submit" value="Ajouter une photo">
+		<p class="delete-galery">Supprimer la galerie</p>
+	</div>
+	
+	<div class="modal-wrapper js-modal-stop-two" id="js-modal-add-project" style="display:none;">
+		<a href="#"><i class="fa-solid fa-xmark js-modal-close-two"></i></a>
+		<a href="#"><i class="fa-solid fa-arrow-left js-modal-return"></i></a>
+		<p id="titlemodal">Ajout photo</p>
+		<form class="modal-form">
+			<div class="select-photo">
+				<i class="fa-sharp fa-regular fa-image"></i>
+				<label for="photo-input" class="file-upload">+ Ajouter photo</label>
+				<input id="photo-input" type="file" name="image">
+				<p>jpg, png : 4mo max</p>	
+			</div>
+			<div class="imageFormDisplay"></div>
+			<label for="title-photo">Titre</label>
+			<input type="text" name="title" id="title-photo">
+			<label for="category">Catégorie</label>
+			<select id="category" name="category">
+				<option value="default"></option>
+				<option value="1">Objets</option>
+				<option value="2">Appartements</option>
+				<option value="3">Hôtels & restaurants</option>
+			</select>
+			<p id="error-message-modal"></p>
+			<button id="valider-photo" type="button">Valider</button>
+		</form>	
+	</div>
+</div>
+
+
+<!-- Script JS -->
 <script src="./js/index.js"></script>
+<script src="./js/modale.js"></script>
 </body>
 </html>
