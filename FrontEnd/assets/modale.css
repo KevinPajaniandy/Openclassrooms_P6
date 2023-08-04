@@ -50,6 +50,17 @@
 	width: 420px;
 }
 
+
+.fa-trash-can {
+	position: absolute;
+	top: 6px;
+	right: 6px;
+	color: white;
+	padding: 4px;
+	background-color: black;
+	border-radius: 2px;
+}
+
 .projets-modal img {
 	display: flex;
 	flex-wrap: wrap;
@@ -64,7 +75,7 @@
 }
   
 /* Style pour le bouton de fermeture (croix) */
-.js-modal-close {
+.js-modal-close, .js-modal-close-two {
 	position: absolute;
 	top: 26px;
 	right: 30px;
@@ -88,5 +99,125 @@
 	cursor: pointer;
 }
 
+.modal-page-two {
+	width: 630px;
+	height: 670px;
+	flex-shrink: 0;
+	padding: 0;
+}
+
+.js-modal-return {
+	position: absolute;
+	top: 26px;
+	left: 30px;
+	font-size: 23px;
+	color: black;
+}	
 
 
+.modal-form {
+	display: flex;
+	flex-direction: column;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #B3B3B3;
+	gap: 10px;	
+}
+
+.modal-form > input {
+	height: 51px;
+	background: #FFFFFF;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	border: none;
+	margin-bottom: 20px;
+}
+
+.modal-form > select {
+	font-family: 'Work Sans';
+	height: 51px;
+	background: #FFFFFF;
+	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+	border: none;
+	margin-bottom: 20px;
+	padding-left: 20px;
+
+}
+
+#valider-photo {
+	background: #A7A7A7;
+	border-radius: 60px;
+	padding: 10px 140px 10px 140px;
+	border: none;
+	display: flex;
+	justify-content: center;
+	align-self: center;
+	width: 237px;
+
+}
+
+.select-photo {
+	background: #E8F1F7;
+	border-radius: 3px;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 0px 120px 0px 120px;
+	margin-bottom: 30px;
+}
+
+.select-photo > i {
+	padding-top: 20px;
+	color: #B9C5CC;
+	font-size: 50px;
+	display: flex;
+	justify-content: center;
+}
+
+.file-upload {
+	background: #CBD6DC;
+	border-radius: 50px;
+	padding: 10px 30px 10px 30px;
+	margin-top: 20px;
+	margin-bottom: 7px;
+	text-align: center;
+	color: #306685;
+	text-align: center;
+	font-family: Work Sans;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 500;
+	line-height: normal;
+}
+
+.jpg {
+	color: #444;
+	text-align: center;
+	font-family: Work Sans;
+	font-size: 10px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
+}
+    
+#photo-input {
+	display: none;
+} 
+
+#title-photo {	
+	font-family: 'Work Sans';
+	padding-left: 20px;
+}
+
+.select-photo > p {
+	text-align: center;
+	padding-bottom: 20px;
+}
+
+.valid {
+	color: green;
+}
+
+
+#error-message-modal {
+	color: red;
+	margin-bottom: 10px;
+}

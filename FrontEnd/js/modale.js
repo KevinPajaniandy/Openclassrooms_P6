@@ -48,6 +48,21 @@ btns.forEach((element) => {
   });
 });
 
-
+// Afficher la seconde partie de la modale :
+  // Récupération de l'élément HTML du bouton "Ajouter une photo"
+  const addPhotoButton = document.querySelector('.add-photo');
+  // Récupération de l'élément HTML de la fenêtre modale pour ajouter un projet
+  const modalAddProject = document.querySelector('#js-modal-add-project');
+  // Ajout d'un gestionnaire d'événement pour empêcher la propagation de l'événement de clic sur la fenêtre modale
+  modalAddProject.addEventListener('click', function (e) {
+    e.stopPropagation();
+  });
+  // Récupération de l'élément HTML de la première fenêtre modale
+  const firstModal = document.querySelector('#js-modal-first');
+  // Ajout d'un gestionnaire d'événement pour afficher la fenêtre modale pour ajouter un projet lorsqu'on clique sur le bouton "Ajouter une photo"
+  addPhotoButton.addEventListener('click', function () {
+    modalAddProject.style.display = null;
+    firstModal.style.display = 'none';
+  });
 
   
