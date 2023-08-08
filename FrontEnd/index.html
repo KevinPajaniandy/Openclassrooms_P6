@@ -85,19 +85,17 @@
 	</nav>
 </footer>
 
-<!-- Modale -->
-<div id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal" style="display:none;">
-	<div class="modal-overlay"></div>
-	<div class="modal-wrapper js-modal-stop modal-page-one" id="js-modal-first">
+<!-- Modale 1 -->
+<div id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="titlemodal" style="display:none;" >
+	<div class="modal-wrapper js-modal-stop" id="js-modal-first">
 		<a href="#"><i class="fa-solid fa-xmark js-modal-close"></i></a>
 		<p id="titlemodal">Galerie photo</p>
 		<div class="projets-modal"></div>
 		<input class="add-photo" type="submit" value="Ajouter une photo">
 		<p class="delete-galery">Supprimer la galerie</p>
 	</div>
-	
-	<div class="modal-wrapper js-modal-stop-two modal-page-two" id="js-modal-add-project" style="display:none;">
-		<a href="#"><i class="fa-solid fa-xmark js-modal-close-two"></i></a>
+	<div class="modal-wrapper js-modal-stop-two" id="js-modal-add-project" style="display:none;">
+		<a href="#"><i class="fa-solid fa-xmark js-modal-close"></i></a>
 		<a href="#"><i class="fa-solid fa-arrow-left js-modal-return"></i></a>
 		<p id="titlemodal">Ajout photo</p>
 		<form class="modal-form">
@@ -105,23 +103,22 @@
 				<i class="fa-sharp fa-regular fa-image"></i>
 				<label for="photo-input" class="file-upload">+ Ajouter photo</label>
 				<input id="photo-input" type="file" name="image">
-				<p class="jpg">jpg, png : 4mo max</p>	
+				<p>jpg, png : 4mo max</p>	
 			</div>
 			<div class="imageFormDisplay"></div>
 			<label for="title-photo">Titre</label>
 			<input type="text" name="title" id="title-photo">
-			<label for="category">Catégorie</label>
-			<select id="category" name="category">
-				<option value="default"></option>
-				<option value="1">Objets</option>
-				<option value="2">Appartements</option>
-				<option value="3">Hôtels & restaurants</option>
+			<label for="categories">Catégorie</label>
+			<select id="categories" name="categories">
+				
 			</select>
 			<p id="error-message-modal"></p>
-			<button id="valider-photo" type="button">Valider</button>
 		</form>	
+		<button id="valider-photo" type="button">Valider</button>
+	
 	</div>
 </div>
+
 
 
 <!-- Script JS -->

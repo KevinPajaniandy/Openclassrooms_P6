@@ -65,8 +65,11 @@ function createProjects(tableauProjet){
 function createFilters(tableauFilter){
   // On sélectionne un élément du document ayant la classe CSS "filters" et on le stocke dans la variable "filters".
   const filters = document.querySelector(".filters");
+  // on selectionne le composant select
+  const select = document.getElementById("categories");
   // On vide le contenu de l'élément "filters". Cela effacera tous les éléments enfants qu'il contient.
   filters.innerHTML="";
+  select.innerHTML="";
   // On utilise une boucle forEach pour parcourir chaque élément du tableau "tableauFilter".
   tableauFilter.forEach(element => {
   // On affiche chaque élément du tableau dans la console.
@@ -75,6 +78,13 @@ function createFilters(tableauFilter){
   const filter = createFilter(element);
   // On ajoute l'élément "filter" en tant qu'enfant de l'élément "filters". Cela placera l'élément "filter" à l'intérieur de l'élément "filters".
   filters.appendChild(filter);
+
+  if(element.id!=0){
+  // On appelle une fonction appelée "createslectCategorie" avec l'élément actuel en tant qu'argument. Le résultat de cette fonction est stocké dans une variable appelée "option".
+  const option = createOption(element);
+  // On ajoute l'élément "option" en tant qu'enfant de l'élément "select".
+  select.appendChild(option);
+}
   });
 }
 
@@ -96,6 +106,13 @@ function createFigure(work){
     figure.appendChild(figcaption);
 
     return figure;
+}
+
+function createOption(categorie){
+  const option = document.createElement("option");
+  option.value = categorie.id;
+  option.text = categorie.name;
+  return option;
 }
 function createFilter(categorie) {
 // On crée un bouton pour le filtre et on lui attribue le nom de la catégorie de travaux
