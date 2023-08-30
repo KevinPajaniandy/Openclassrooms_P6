@@ -24,10 +24,10 @@
 	<h1>Sophie Bluel <span>Architecte d'intérieur</span></h1>
 	<nav>
 		<ul>
-			<a href="./index.html"></a><li>projets</li>
-			<li>contact</li>
-			<a id="login" href="/FrontEnd/login.html"><li>login</li></a>
-			<a id="logout"><li>logout</li></a>
+			<li><a href="./index.html#portfolio">projets</a></li>
+			<li><a href="./index.html#contact">contact</a></li>
+			<li><a id="login" href="./login.html">login</a></li>
+			<li><a id="logout">logout</a></li>
 			<li><img src="./assets/icons/instagram.png" alt="Instagram"></li>
 		</ul>
 	</nav>
@@ -91,21 +91,27 @@
 		<a href="#"><i class="fa-solid fa-xmark js-modal-close"></i></a>
 		<p id="titlemodal">Galerie photo</p>
 		<div class="projets-modal"></div>
-		<input class="add-photo" type="submit" value="Ajouter une photo">
-		<p class="delete-galery">Supprimer la galerie</p>
+		<input class="add-photo" value="Ajouter une photo">
+		<p id="delete-galery" title="Voulez-vous supprimer définitivement la galerie ?">Supprimer la galerie</p>
 	</div>
+
+<!-- Modale 2 -->
 	<div class="modal-wrapper js-modal-stop-two" id="js-modal-add-project" style="display:none;">
 		<a href="#"><i class="fa-solid fa-xmark js-modal-close"></i></a>
 		<a href="#"><i class="fa-solid fa-arrow-left js-modal-return"></i></a>
 		<p id="titlemodal">Ajout photo</p>
 		<form class="modal-form">
 			<div class="select-photo">
+				<div class="imageFormDisplay">
+					<img id="imgPreview" src="" alt="imagePreview"/>
+					<div class="remove"> <i class="fa-solid fa-xmark"> </i></div>
+				</div>
 				<i class="fa-sharp fa-regular fa-image"></i>
-				<label for="photo-input" class="file-upload">+ Ajouter photo</label>
-				<input id="photo-input" type="file" name="image">
-				<p>jpg, png : 4mo max</p>	
+				<input class="file-upload" value="+ Ajouter photo" onclick="document.getElementById('photo-input').click()"/>
+				<input id="photo-input" type="file" name="photo-input" accept=".jpg, .jpeg, .png, .webp" onchange="changeImage(event)">
+				<p class = "fileFormat">jpg, png : 4mo max</p>	
 			</div>
-			<div class="imageFormDisplay"></div>
+			
 			<label for="title-photo">Titre</label>
 			<input type="text" name="title" id="title-photo">
 			<label for="categories">Catégorie</label>
@@ -114,7 +120,7 @@
 			</select>
 			<p id="error-message-modal"></p>
 		</form>	
-		<button id="valider-photo" type="button">Valider</button>
+		<button id="validerButton" type="button">Valider</button>
 	
 	</div>
 </div>
@@ -124,5 +130,6 @@
 <!-- Script JS -->
 <script src="./js/index.js"></script>
 <script src="./js/modale.js"></script>
+
 </body>
 </html>

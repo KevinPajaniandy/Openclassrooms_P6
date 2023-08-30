@@ -270,20 +270,25 @@ nav a {
 	background-color: transparent;
 }
 
-.button-selected {
+.add-photo {
 	display: inline-flex;
 	justify-content:center;
 	flex-shrink: 1;
 	font-family: Syne;
 	font-size: 16px;
 	font-weight: 700;
-	margin-top: 50px;
-	margin-bottom: 50px;
+	margin-top: 38px;
+	margin-bottom: 32px;
 	color: white;
 	padding: 8px 20px 8px 20px;
 	border: 1px solid #1D6154;
 	border-radius: 60px;
 	background-color: #1D6154;
+	text-align: center;
+}
+
+.figcaptionIndex{
+	padding: 8px 0 0 0 
 }
 
 .filter:hover {
@@ -303,7 +308,6 @@ nav a {
 .modifier-projet-container-two {
 	display: flex;
 	justify-content: center;
-	margin-bottom: 45px;
 	margin-left: 20px;
 }
 

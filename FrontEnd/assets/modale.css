@@ -18,25 +18,27 @@
 
 .modal-wrapper{
 	position: relative;
-	top:950px;
+	top: 950px;
 	left: 50%;
 	justify-content: center;
     width: 630px;
-	max-height: 730px;
-	padding: 60px 0px 48px 0px;
+	padding: 55px 0px 55px 0px;
 	background: #FFFFFF;
 	border-radius: 10px;
 	transform : translate(-50%,-50%);
 }
 
 #titlemodal {
+	color: #000;
 	text-align: center;
 	font-family: Work Sans;
-	color: black;
 	font-size: 26px;
+	font-style: normal;
 	font-weight: 400;
-	padding-bottom: 46px;
+	line-height: normal;
+	margin-bottom: 45px;
 }
+
 
 .projets-modal {
 	display: grid;
@@ -49,15 +51,8 @@
 	width: 420px;
 }
 
-
-.fa-trash-can {
-	position: absolute;
-	top: 6px;
-	right: 6px;
-	color: white;
-	padding: 4px;
-	background-color: black;
-	border-radius: 2px;
+.projets-modal > figure{
+	position: relative;
 }
 
 .projets-modal img {
@@ -66,6 +61,22 @@
 	width: 76.86px;
 	height: auto;
 }
+
+.delete-icon {
+	position: absolute;
+	top:5px;
+	right: 5px;
+	color: white;
+	padding: 4px;
+	background-color: black;
+	border-radius: 2px;
+}
+
+.restore-button {
+	color : black;
+	font-size: 20px;
+}
+
 
 .modal-page-one, .modal-page-two, .modal-wrapper{
 	display: flex;
@@ -89,11 +100,14 @@
 	cursor: pointer;
 }
 
-.delete-galery{
-	display: flex;
-	justify-content: center;
-	color:#D65353;
-	font-family: 'Syne';
+#delete-galery{
+	color: #D65353;
+	text-align: center;
+	font-family: Syne;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 400;
+	line-height: normal;
 	cursor: pointer;
 }
 
@@ -110,24 +124,23 @@
 	left: 30px;
 	font-size: 23px;
 	color: black;
+	
 }	
-
 
 .modal-form {
 	display: flex;
 	flex-direction: column;
-	padding-bottom: 20px;
-	margin-bottom: 40px;
+	gap: 25px;	
+	width: 65%;
 	border-bottom: 1px solid #B3B3B3;
-	gap: 10px;	
+    margin-bottom: 40px;
 }
 
 .modal-form > input {
 	height: 51px;
 	background: #FFFFFF;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-	border: none;
-	margin-bottom: 20px;
+	border:  none;	
 }
 
 .modal-form > select {
@@ -141,14 +154,13 @@
 
 }
 
-#valider-photo {
+#validerButton {
 	background: #A7A7A7;
 	border-radius: 60px;
 	padding: 10px 140px 10px 140px;
 	border: none;
 	display: flex;
 	justify-content: center;
-	align-self: center;
 	width: 237px;
 	height: 38px;
 	color: #FFF;
@@ -156,7 +168,13 @@
 	font-size: 14px;
 	font-style: normal;
 	font-weight: 700;
+	cursor: pointer;
 }
+
+#validerButton.green-button {
+	background-color: #1D6154;
+	color: white
+  }
 
 .select-photo {
 	background: #E8F1F7;
@@ -164,35 +182,64 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	padding: 0px 120px 0px 120px;
-	margin-bottom: 30px;
+	align-items: center;
+	gap: 10px;
+	flex: 1;
 }
 
+.select-photo > p {
+	text-align: center;
+	padding-bottom: 20px;
+	color: #444;
+	text-align: center;
+	font-family: Work Sans;
+	font-size: 10px;
+	font-style: normal;
+	font-weight: 400;
+}
 .select-photo > i {
-	padding-top: 20px;
 	color: #B9C5CC;
 	font-size: 50px;
 	display: flex;
 	justify-content: center;
+	flex-shrink: 0;
+	margin-top: 15px;
+
+}
+
+.imageFormDisplay{
+	display: none;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+}
+.imageFormDisplay > img {
+	height: 200px;
+}
+.remove{
+	position: absolute;
+	top: 5px;
+	right: 5px;
 }
 
 .file-upload {
 	background: #CBD6DC;
 	border-radius: 50px;
-	padding: 10px 30px 10px 30px;
-	margin-top: 20px;
-	margin-bottom: 7px;
 	text-align: center;
 	color: #306685;
-	text-align: center;
 	font-family: Work Sans;
 	font-size: 14px;
 	font-style: normal;
 	font-weight: 500;
 	line-height: normal;
+	width: 173px;
+	height: 36px;
+	flex-shrink: 0;
+	cursor: pointer;
+	border: none;
 }
 
-.jpg {
+.jpg,.jpeg, .png, .webp  {
 	color: #444;
 	text-align: center;
 	font-family: Work Sans;
@@ -211,16 +258,12 @@
 	padding-left: 20px;
 }
 
-.select-photo > p {
-	text-align: center;
-	padding-bottom: 20px;
-}
-
-.valid {
-	color: green;
-}
 
 #error-message-modal {
 	color: red;
 	margin-bottom: 10px;
+}
+
+.editer{
+	margin-top: 5px;
 }
