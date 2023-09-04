@@ -28,6 +28,30 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
+
+  // Fonction pour fermer le modal
+  function closeModal() {
+    modal.style.display = "none";
+  }
+  // Pour chaque bouton de la liste btns on va ajouter un listener pour ouvrir la modale
+  btns.forEach((element) => {
+    // Ouvrir le modal lorsqu'on clique sur le bouton
+    element.addEventListener("click", openModal);
+  });
+  // Fermer le modal lorsqu'on clique sur la croix
+  closes.forEach((close) => {
+    close.addEventListener("click", closeModal);
+  });
+
+  // Fermer le modal lorsqu'on clique en dehors de celui-ci (sur le fond semi-transparent)
+  window.addEventListener("click", function (event) {
+    if (event.target === modal) {
+      closeModal();
+    }
+  });
+});
+
+
   // Coder une fonction que me cree un element figure comme suit
   function createFigureModale(work) {
     // On crée un élément HTML de type figure
@@ -40,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // On crée un élément HTML de type figcaption pour le titre de l'image et on lui attribue le texte de la légende
     const figcaption = document.createElement("figcaption");
     figcaption.textContent = "éditer";
-    figcaption.className = "editer"
+    figcaption.className = "editer";
     //Ajouter l'icon trash et aussi un action listener dnas lequel tu affiche l'id de l'element
     // Crée un élément HTML de type i pour l'icône de suppression
     const deleteIcon = document.createElement("i");
@@ -66,29 +90,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
     return figure;
   }
-
-  // Fonction pour fermer le modal
-  function closeModal() {
-    modal.style.display = "none";
-  }
-  // Pour chaque bouton de la liste btns on va ajouter un listener pour ouvrir la modale
-  btns.forEach((element) => {
-    // Ouvrir le modal lorsqu'on clique sur le bouton
-    element.addEventListener("click", openModal);
-  });
-  // Fermer le modal lorsqu'on clique sur la croix
-  closes.forEach((close) => {
-    close.addEventListener("click", closeModal);
-  });
-
-  // Fermer le modal lorsqu'on clique en dehors de celui-ci (sur le fond semi-transparent)
-  window.addEventListener("click", function (event) {
-    if (event.target === modal) {
-      closeModal();
-    }
-  });
-});
-
 // Afficher la seconde partie de la modale :
 // Récupération de l'élément HTML du bouton "Ajouter une photo"
 const addPhotoButton = document.querySelector(".add-photo");
@@ -153,7 +154,6 @@ function deleteWork(workId) {
       console.log("Erreur lors de la suppression : " + error.message);
     });
 }
-  
 
 function removeImage() {
   const image = document.getElementById("imgPreview");
@@ -161,12 +161,16 @@ function removeImage() {
   const faimage = document.querySelector(".fa-image");
   const fileUpload = document.querySelector(".file-upload");
   const photoInput = document.querySelector("#photo-input");
+  const fileFormat = document.querySelector(".fileFormat");
 
   imageFormDisplay.style.display = "none";
   faimage.style.display = "block";
   fileUpload.style.display = "block";
-  photoInput.style.display = "block";
+  photoInput.style.display = "none";
+  fileFormat.style.display = "block";
   image.src = "";
+
+
 }
 
 // Récupérer l'élément d'upload de fichier
@@ -211,18 +215,20 @@ function changeImage(e) {
   }
 }
 
-//==== remplacer selected-image par photo input 
+//==== remplacer selected-image par photo input
 const imageInput = document.getElementById("photo-input");
 const titleInput = document.getElementById("title-photo");
 const categoriesInput = document.getElementById("categories");
 const validerButton = document.getElementById("validerButton");
+titleInput.addEventListener("input", validateForm);
+categoriesInput.addEventListener("change", validateForm);
 
 function validateForm() {
   const titleValid = titleInput.value.trim() !== "";
   const categoriesSelected = categoriesInput.value !== "";
-  const imagePreview = document.getElementById("imgPreview");
+  const image = imageInput.files[0];
 
-  if (imagePreview.src !== "" && titleValid && categoriesSelected) {
+  if ( image && titleValid && categoriesSelected) {
     validerButton.classList.add("green-button");
     return true;
   } else {
@@ -231,42 +237,58 @@ function validateForm() {
   }
 }
 
-validateForm();
 
-titleInput.addEventListener("input", validateForm);
-categoriesInput.addEventListener("change", validateForm);
+document.querySelector(".modal-form").addEventListener("submit", function(e) {
+  e.preventDefault();
 
-validerButton.addEventListener("click", async (event) => {
-  event.preventDefault();
+  if (!validateForm()) {
+    alert("Veuillez remplir tous les champs !");
 
-  if (validateForm()) {
+  }else{
     const file = imageInput.files[0];
     const formData = new FormData();
     formData.append("title", titleInput.value);
     formData.append("image", file);
     formData.append("category", categoriesInput.value);
 
-    try {
-      const response = await fetch("http://localhost:5678/api/works", {
+      fetch("http://localhost:5678/api/works", {
         method: "POST",
         headers: {
-          "Authorization": "Bearer " + localStorage.getItem("token"),
+          Authorization: "Bearer " + localStorage.getItem("token"),
         },
         body: formData,
+      }).then((response) =>{
+        if (response.status ==201) {
+          alert("Projet ajouté avec succès !");
+          return response.json();
+        }
+        else {
+          console.error("Erreur lors de l'ajout du projet:", response.status);
+        }
+      })
+      .then((projet) => {
+        if(projet){
+          //Mettre à jour le tableau globale 
+          works.push(projet);
+          // AJouter le projet à la gallery sur index 
+          const figure = createFigure(projet);
+          document.querySelector(".gallery").appendChild(figure);
+          // AJouter aussi le projet dnas la modale gallery
+          const figureModale = createFigureModale(projet);
+          document.querySelector(".projets-modal").appendChild(figureModale);
+          // retourner sur modale gallery 
+          returnToFirstModalButton.click();
+        }
+      })
+       .catch( (error) =>{
+        console.log("Erreur lors de la creation : " + error.message);
+        alert("Une erreur est survenue lors de l'ajout!");
       });
 
-      if (response.ok) {
-        const projet = await response.json();
-        console.log("Projet ajouté avec succès:", projet);
-      } else {
-        console.error("Erreur lors de l'ajout du projet:", response.status);
-      }
-    } catch (error) {
-      console.error("Erreur lors de la requête:", error);
-    }
-  } else {
-    alert("Veuillez remplir tous les champs.");
-  }
-});
+      
+      } 
+    
+  });
+
 
 

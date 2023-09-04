@@ -178,7 +178,7 @@ barreNoir.style.display = "flex";
 // cacher les boutons modifier
 const btnsModifier = document.querySelectorAll(".btnModifier")
 btnsModifier.forEach(element => {
-  element.style.display = "Block";
+  element.style.display = "flex";
 });
 }
 else {
