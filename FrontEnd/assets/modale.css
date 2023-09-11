@@ -19,7 +19,7 @@
 /* Rendre l'overlay visible lorsque l'une des modales est active */
 .modal + .overlay {
 	display: block;
-  }
+}
 
 .modal-wrapper{
 	position: relative;
