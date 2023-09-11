@@ -26,7 +26,7 @@ loginForm.addEventListener('submit', async (event) => {
     localStorage.setItem('userId', token.userId);
 
     // Redirige l'utilisateur vers la page d'accueil  
-    window.location.href = './index.html';
+    window.location.href = '/FrontEnd/index.html';
 
   } else {
     // Afficher un message d'erreur si les informations de connexion sont invalides

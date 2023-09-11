@@ -175,38 +175,58 @@ function removeImage() {
 
 // Récupérer l'élément d'upload de fichier
 const inputFile = document.querySelector("#photo-input");
-//-------
+// Ajouter un gestionnaire d'événements "change" à l'élément d'upload
 inputFile.addEventListener("change", changeImage);
 
 function changeImage(e) {
+  // Récupérer l'élément d'image avec l'ID "imgPreview"
   const image = document.getElementById("imgPreview");
+  // Récupérer l'élément d'affichage du formulaire d'image
   const imageFormDisplay = document.querySelector(".imageFormDisplay");
+  // Récupérer l'icône d'image avec la classe "fa-image"
   const faimage = document.querySelector(".fa-image");
+  // Récupérer l'élément de téléchargement de fichier avec la classe "file-upload"
   const fileUpload = document.querySelector(".file-upload");
+  // Récupérer l'élément d'entrée de photo par son ID
   const photoInput = document.querySelector("#photo-input");
+  // Récupérer l'élément de format de fichier avec la classe "fileFormat"
   const fileFormat = document.querySelector(".fileFormat");
+  // Récupérer l'élément de suppression avec la classe "remove"
   const remove = document.querySelector(".remove");
-
+  // Ajouter un gestionnaire d'événements "click" à l'élément de suppression
   remove.addEventListener("click", function (event) {
+    // Appeler la fonction de suppression
     removeImage();
   });
-
+  // Récupérer le fichier sélectionné par l'utilisateur à partir de l'objet d'événement "e"
   const file = e.target.files[0];
-
+  // Vérifier si le type de fichier correspond à une image
   if (file.type.match("image.*")) {
+    // Vérifier si la taille du fichier est inférieure ou égale à 4 Mo
     if (file.size <= 4194304) {
+      // Créer un lecteur de fichier
       let reader = new FileReader();
+      // Lorsque le fichier est chargé avec succès
       reader.onload = function (event) {
+        // Mettre à jour la source de l'image avec les données du fichier
         image.src = event.target.result;
+        // Afficher le formulaire d'image
         imageFormDisplay.style.display = "flex";
+        // Masquer l'icône d'image
         faimage.style.display = "none";
+        // Masquer le champ de téléchargement de fichier
         fileUpload.style.display = "none";
+        // Masquer l'élément d'entrée de photo
         photoInput.style.display = "none";
+        // Masquer l'élément de format de fichier
         fileFormat.style.display = "none";
       };
+      // Lire le contenu du fichier en tant que URL de données
       reader.readAsDataURL(file);
     } else {
+      // Afficher une alerte si le fichier est trop volumineux
       alert("Le fichier est de grande taille (max 4 Mo).");
+      // Appeler la fonction de suppression
       removeImage();
     }
   } else {
@@ -220,45 +240,56 @@ const imageInput = document.getElementById("photo-input");
 const titleInput = document.getElementById("title-photo");
 const categoriesInput = document.getElementById("categories");
 const validerButton = document.getElementById("validerButton");
+
+// Ajouter un écouteur d'événements pour surveiller les entrées dans le champ de titre
 titleInput.addEventListener("input", validateForm);
+// Ajouter un écouteur d'événements pour surveiller les changements dans le champ de catégories
 categoriesInput.addEventListener("change", validateForm);
 
-function validateForm() {
-  const titleValid = titleInput.value.trim() !== "";
-  const categoriesSelected = categoriesInput.value !== "";
-  const image = imageInput.files[0];
 
+// Définir une fonction pour valider le formulaire
+function validateForm() {
+  // Vérifier si le champ de titre n'est pas vide après suppression des espaces
+  const titleValid = titleInput.value.trim() !== "";
+  // Vérifier si une catégorie a été sélectionnée
+  const categoriesSelected = categoriesInput.value !== "";
+  // Récupérer le fichier d'image sélectionné par l'utilisateur
+  const image = imageInput.files[0];
+  // Si le champ de titre, la catégorie et l'image sont valides
   if ( image && titleValid && categoriesSelected) {
+    // Ajouter une classe "green-button" au bouton de validation
     validerButton.classList.add("green-button");
-    return true;
+    return true;// Le formulaire est valide
   } else {
+    // Retirer la classe "green-button" du bouton de validation
     validerButton.classList.remove("green-button");
-    return false;
+    return false;// Le formulaire n'est pas valide
   }
 }
 
-
+// Ajouter un écouteur d'événements au formulaire modal pour la soumission
 document.querySelector(".modal-form").addEventListener("submit", function(e) {
-  e.preventDefault();
-
+  e.preventDefault();// Empêcher la soumission par défaut du formulaire
+  // Si le formulaire n'est pas valide
   if (!validateForm()) {
     alert("Veuillez remplir tous les champs !");
 
   }else{
-    const file = imageInput.files[0];
-    const formData = new FormData();
-    formData.append("title", titleInput.value);
-    formData.append("image", file);
-    formData.append("category", categoriesInput.value);
-
+    // Si le formulaire est valide, préparer les données pour l'envoi
+    const file = imageInput.files[0]; // Récupérer le fichier d'image sélectionné par l'utilisateur
+    const formData = new FormData();// Créer un objet FormData pour stocker les données du formulaire
+    formData.append("title", titleInput.value);// Ajouter le titre du projet au FormData
+    formData.append("image", file);// Ajouter le fichier image au FormData
+    formData.append("category", categoriesInput.value);// Ajouter la catégorie du projet au FormData
+      // Effectuer une requête POST vers le serveur local
       fetch("http://localhost:5678/api/works", {
-        method: "POST",
+        method: "POST",// Utiliser la méthode POST pour envoyer les données
         headers: {
           Authorization: "Bearer " + localStorage.getItem("token"),
         },
         body: formData,
-      }).then((response) =>{
-        if (response.status ==201) {
+      }).then((response) =>{// Utiliser l'objet FormData comme corps de la requête
+        if (response.status ==201) {// Si la requête a réussi (code de statut 201 pour "Créé")
           alert("Projet ajouté avec succès !");
           return response.json();
         }

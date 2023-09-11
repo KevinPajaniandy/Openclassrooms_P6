@@ -316,6 +316,22 @@ nav a {
 	background-color: transparent;
 }
 
+.couleur-inversee {
+	display: inline-flex;
+	justify-content:center;
+	flex-shrink: 1;
+	font-family: Syne;
+	font-size: 16px;
+	font-weight: 700;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	color: #fff;
+	padding: 8px 20px 8px 20px;
+	border: 1px solid #1D6154;
+	border-radius: 60px;
+	background-color:  #1D6154;
+}
+
 .add-photo {
 	display: inline-flex;
 	justify-content:center;
@@ -339,10 +355,6 @@ nav a {
 
 .filter:hover {
 	cursor: pointer;
-}
-
-.modifier-projet-container-one {
-	margin-top: 15px;
 }
 
 .modifier-projet-container-two {
